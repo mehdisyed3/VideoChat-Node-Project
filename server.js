@@ -23,8 +23,9 @@ app.get('/:room',(req,res)=>{
 })
 
 io.on('connection', socket=>{
-  socket.on('join-room', ()=>{
-    console.log("JOINED ROOM")
+  socket.on('join-room', roomId=>{
+    socket.join(roomId)
+    socket.io(roomId).boradcast.emit('user-connected')
   })
 })
 

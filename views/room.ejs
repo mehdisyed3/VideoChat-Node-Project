@@ -6,11 +6,15 @@
   <title>Video Chat Project</title>
   <link rel="stylesheet" href="style.css">
   <script src='/socket.io/socket.io.js' ></script>
+  <script>
+    const ROOM_ID= "<%= roomId %>"
+  </script>
   
 </head>
 <body>
   <h1>Video Chat</h1>
-  <div id="video_grid"></div>
+  <div id="video_grid">
+  </div>
   <script src='script.js'></script>
 </body>
 </html>
