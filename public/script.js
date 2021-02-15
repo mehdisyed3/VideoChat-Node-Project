@@ -4,7 +4,7 @@ const videoGrid = document.getElementById('video_grid')
 const myVideo = document.createElement('video')
 myVideo.muted = true
 
-//1.24.11
+//1.24.11 videp
 
 let myVideoStream;
 
