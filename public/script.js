@@ -23,8 +23,8 @@ socket.on('user-connected',()=>{
   connectToNewUser()
 })
 
-
 const connectToNewUser = () => {
+
 
 }
 
@@ -33,6 +33,7 @@ const addVideoStream = (video, stream) => {
   video.addEventListener('loadedmetadata', () => {
     video.play()
   })
+  
 
   videoGrid.append(video)
 }
