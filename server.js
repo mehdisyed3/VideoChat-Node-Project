@@ -29,7 +29,7 @@ app.get('/:room',(req,res)=>{
 io.on('connection', socket=>{
   socket.on('join-room',(roomId,userId)=>{
     socket.join(roomId)
-    socket.io(roomId).boradcast.emit('user-connected', userId)
+    socket.to(roomId).broadcast.emit('user-connected', userId)
   })
 })
 
