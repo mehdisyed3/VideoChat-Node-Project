@@ -1,3 +1,16 @@
+
+body{
+  margin:0;
+  padding:0;
+  background-image: linear-gradient(to right, #eacba6, #d9ac60)
+}
+
+h1{
+
+  color: black;
+  margin-left: 40vw
+}
+
 #video_grid{
   display: flex;
   justify-content: center;
@@ -6,6 +19,35 @@
 video{
 
   height: 300px;
-  width: 350px;
+  width: 400px;
   object-fit: cover;
+
+}
+
+.main{
+  display: flex;
+  height : 100vh;
+  
+
+}
+
+.main__left{
+  display: flex;
+  flex-direction: column;
+  flex: 0.8;
+}
+
+.main__right{
+  flex: 0.2;
+}
+
+.main__controls{
+
+}
+
+.main__videos{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
 }
