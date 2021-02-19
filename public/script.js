@@ -14,37 +14,25 @@ var peer = new Peer(undefined,{
 
 let myVideoStream;
 
-const addVideoStream = (video, stream) => {
-  video.srcObject = stream;
-  video.addEventListener('loadedmetadata', () => {
-    video.play()
-  })
-  videoGrid.append(video)
-}
-
 // getting user camera and microphone
 navigator.mediaDevices.getUserMedia({
   video: true,
-  audio: true
+  audio: false
 })
 .then(stream => {
   myVideoStream = stream
   addVideoStream(myVideo, stream)
 
 
-peer.on('call', (call) => {
-  getUserMedia({video: true, audio: true}, function(stream) {
-    call.answer(stream); // Answer the call with an A/V stream.
-    call.on('stream', function(remoteStream) {
-      // Show stream in some video/canvas element.
-      addVideoStream(video,userVideoStream)
-    });
-  }, function(err) {
-    console.log('Failed to get local stream' ,err);
-  });
-});
+peer.on('call', call => {
+  call.answer(stream)
 
-  ////Somethis is wrong here... may be the block below should not be within a promise.
+  const video = document.createElement('video')
+  call.on('stream', userVideoStream =>{
+    addVideoStream(video, userVideoStream)
+  })
+}
+);
   
   socket.on('user-connected',(userId)=>{
     connectToNewUser(userId,stream)
@@ -52,8 +40,7 @@ peer.on('call', (call) => {
 })
 
 peer.on('open', id=>{
-
-  socket.emit('join-room',ROOM_ID,id)
+  socket.emit('join-room',ROOM_ID,id);
 })
 
 const connectToNewUser = (userId,stream) => {
@@ -62,6 +49,14 @@ const connectToNewUser = (userId,stream) => {
   call.on('stream', userVideoStream =>{
     addVideoStream(video, userVideoStream)
   })
+}
+
+const addVideoStream = (video, stream) => {
+  video.srcObject = stream;
+  video.addEventListener('loadedmetadata', () => {
+    video.play()
+  })
+  videoGrid.append(video)
 }
 
 
