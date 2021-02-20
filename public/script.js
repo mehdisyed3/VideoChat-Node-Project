@@ -3,7 +3,7 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video_grid')
 const myVideo = document.createElement('video')
-myVideo.muted = true
+// myVideo.muted = true
 
 var peer = new Peer(undefined,{
   path:'/peerjs',
@@ -11,14 +11,14 @@ var peer = new Peer(undefined,{
   port: '9000'
 }); 
 
-//1.39:33
+//2.58.43
 
 let myVideoStream;
 
 // getting user camera and microphone
 navigator.mediaDevices.getUserMedia({
   video: true,
-  audio: false
+  audio: true
 })
 .then(stream => {
   myVideoStream = stream
@@ -77,11 +77,12 @@ socket.on('createMessage', message =>{
 
 
 const scrollToBottom = () => {
-  var d = $('.main__chat_window');
+  let d = $('.main__chat_window');
   d.scrollTop(d.prop("scrollHeight"));
 }
 
 const muteUnmute = () => {
+  console.log('>>>>>', myVideoStream.getAudioTracks())
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   if (enabled) {
     myVideoStream.getAudioTracks()[0].enabled = false;
@@ -96,13 +97,22 @@ const playStop = () => {
   console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
-    myVideoStream.getVideoTracks()[0].enabled = false;
+    myVideoStream.getVideoTracks()[0].muted = false;
     setPlayVideo()
   } else {
     setStopVideo()
-    myVideoStream.getVideoTracks()[0].enabled = true;
+    myVideoStream.getVideoTracks()[0].muted = true;
   }
 }
+
+const setUnmuteButton = () => {
+  const html = `
+    <i class="unmute fas fa-microphone-slash"></i>
+    <span>Unmute</span>
+  `
+  document.querySelector('.main__mute_button').innerHTML = html;
+}
+
 
 const setMuteButton = () => {
   const html = `
