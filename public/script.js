@@ -97,11 +97,11 @@ const playStop = () => {
   console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
-    myVideoStream.getVideoTracks()[0].muted = false;
+    myVideoStream.getVideoTracks()[0].enabled = false;
     setPlayVideo()
   } else {
     setStopVideo()
-    myVideoStream.getVideoTracks()[0].muted = true;
+    myVideoStream.getVideoTracks()[0].enabled = true;
   }
 }
 
