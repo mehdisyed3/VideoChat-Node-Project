@@ -8,7 +8,7 @@ const myVideo = document.createElement('video')
 var peer = new Peer(undefined,{
   path:'/peerjs',
   host: '/',
-  port: '9000'
+  port: '443'
 }); 
 
 //2.58.43
